@@ -1,6 +1,4 @@
 import moonrakerpy as moonpy
-import time
-
 
 printer = moonpy.MoonrakerPrinter('http://192.168.1.59')
 
@@ -21,14 +19,13 @@ G90"""
 }
 
 
-def main():
-
-    for _ in range(1000):
+def move_test(cycles=1001):
+    for i in range(cycles):
         printer.send_gcode(movement["x_pos"])
         printer.send_gcode(movement["x_neg"])
         printer.send_gcode(movement["y_pos"])
         printer.send_gcode(movement["y_neg"])
+        print(f"Cycle {i+1} of {cycles}")
 
-
-if __name__ == "__main__":
-    main()
+def home_all():
+    printer.send_gcode("G28")
